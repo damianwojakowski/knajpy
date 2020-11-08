@@ -1,8 +1,8 @@
-import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api';
+import {GoogleMap, useLoadScript} from '@react-google-maps/api';
 import mapStyles from '../Config/mapStyles.js';
 import React from 'react';
 import uuid from 'react-uuid';
-import IconPicker from '../Utilities/IconPicker.js';
+import Markers from '../Markers/Markers.js';
 
 export default function GoogleMapWrapper() {
     const {isLoaded, loadError} = useLoadScript({
@@ -65,27 +65,7 @@ export default function GoogleMapWrapper() {
                 onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                {markers.map(marker => (
-                    <Marker
-                        key={marker.id}
-                        position={{lat: marker.lat, lng: marker.lng}}
-                        onClick={() => {
-                            setSelected(marker);
-                        }}
-                        icon={IconPicker.getIcon(marker)}
-                    />))}
-
-                {selected ? (<InfoWindow
-                    position={{lat: selected.lat, lng: selected.lng}}
-                    onCloseClick={() => setSelected(null)}
-                >
-                    <div>
-                        <h2>Knajpa</h2>
-                        <p>Nazwa</p>
-                        <p>Opis</p>
-                        <p>Godziny otwarcia: </p>
-                    </div>
-                </InfoWindow>) : null}
+                <Markers markers={markers}/>
             </GoogleMap>
         </div>
     );
