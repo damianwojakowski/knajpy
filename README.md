@@ -1,6 +1,7 @@
 # Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
+Use `npm install` or `npm i` to install dependencies\
 Use `npm start` to run the project - application will be run on [http://localhost:3000](http://localhost:3000).
 
 ### Technologies Used:

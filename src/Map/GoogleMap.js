@@ -24,6 +24,7 @@ export default function GoogleMapWrapper() {
         zoomControl: true
     };
 
+    const [selected, setSelected] = React.useState(null);
     const [markers, setMarkers] = React.useState([]);
 
     const onMapClick = React.useCallback((event) => {
@@ -56,8 +57,22 @@ export default function GoogleMapWrapper() {
                     <Marker
                         key={marker.id}
                         position={{lat: marker.lat, lng: marker.lng}}
+                        onClick={()  => {
+                            setSelected(marker)
+                        }}
                     />))}
 
+                {selected ? (<InfoWindow
+                    position={{lat: selected.lat, lng: selected.lng}}
+                    onCloseClick={() => setSelected(null)}
+                >
+                    <div>
+                        <h2>Knajpa</h2>
+                        <p>Nazwa</p>
+                        <p>Opis</p>
+                        <p>Godziny otwarcia: </p>
+                    </div>
+                </InfoWindow>) : null}
             </GoogleMap>
         </div>
     );
