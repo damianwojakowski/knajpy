@@ -1,8 +1,13 @@
 # Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
+Use `npm start` to run the project (application will be run on[http://localhost:3000](http://localhost:3000)
 
-Using React 17.0.1
+### Technologies Used:
+
+- React 17.0.1
+- Google Maps
+- Local Storage as Repository
 
 ## Available Scripts
 
