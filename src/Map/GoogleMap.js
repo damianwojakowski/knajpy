@@ -8,6 +8,15 @@ export default function GoogleMapWrapper() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
 
+    const mapRef = React.useRef();
+    const onMapLoad = React.useCallback((map) => {
+        mapRef.current = map;
+    }, []);
+
+    const panTo = React.useCallback((lat, lng) => {
+        mapRef.current.panTo({lat, lng});
+    }, []);
+
     const mapContainerStyle = {
         with: '100vw',
         height: '100vh'
@@ -27,6 +36,8 @@ export default function GoogleMapWrapper() {
     });
 
     const onMapClick = React.useCallback((event) => {
+        panTo(event.latLng.lat(), event.latLng.lng());
+
         setMarkers((current) => [...current, {
             lat: event.latLng.lat(),
             lng: event.latLng.lng(),
@@ -51,6 +62,7 @@ export default function GoogleMapWrapper() {
                 center={center}
                 options={options}
                 onClick={onMapClick}
+                onLoad={onMapLoad}
             >
                 {markers.map(marker => (
                     <Marker
