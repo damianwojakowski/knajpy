@@ -2,18 +2,7 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/a
 import mapStyles from '../Config/mapStyles.js';
 import React from 'react';
 import uuid from 'react-uuid';
-
-function getIcon(marker) {
-    const red = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-    const blue = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-    let time = new Date();
-
-    if (true) {
-       return  { url: red };
-    } else {
-       return { url: red };
-    }
-}
+import IconPicker from '../Utilities/IconPicker.js';
 
 export default function GoogleMapWrapper() {
     const {isLoaded, loadError} = useLoadScript({
@@ -83,7 +72,7 @@ export default function GoogleMapWrapper() {
                         onClick={() => {
                             setSelected(marker);
                         }}
-                        icon={getIcon(marker)}
+                        icon={IconPicker.getIcon(marker)}
                     />))}
 
                 {selected ? (<InfoWindow
