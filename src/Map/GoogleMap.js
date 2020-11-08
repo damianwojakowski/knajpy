@@ -1,9 +1,26 @@
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api';
+import mapStyles from '../Config/mapStyles.js';
 
 export default function GoogleMapWrapper() {
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyA7EpfKixpL5f19J_IcZ7UuJyKxg6yj5mg'
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
+
+    const mapContainerStyle = {
+        with: '100vw',
+        height: '100vh'
+    };
+
+    const center = {
+        lat: 51.107883,
+        lng: 17.038538
+    };
+
+    const options = {
+        styles: mapStyles,
+        disableDefaultUI: true,
+        zoomControl: true
+    };
 
     if (loadError) {
         return "Error loading maps";
@@ -13,5 +30,14 @@ export default function GoogleMapWrapper() {
         return "Loading Maps...";
     }
 
-    return <div>map</div>;
+    return (
+        <div>
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                zoom={15}
+                center={center}
+                options={options}
+            />
+        </div>
+    );
 }
