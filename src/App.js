@@ -1,11 +1,13 @@
 import {Component} from 'react';
-import Map from './Map/Map.js';
+import GoogleMapWrapper from './Map/GoogleMap.js';
 
 export default class App extends Component {
 
     render() {
         return (
-            <Map />
+            <div style={{width: "100vw", height: "100vh"}}>
+                <GoogleMapWrapper />
+            </div>
         );
     }
 
