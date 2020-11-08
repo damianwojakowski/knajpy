@@ -5,8 +5,8 @@ Use `npm start` to run the project - application will be run on [http://localhos
 
 ### Technologies Used:
 
-- React 17.0.1
-- Google Maps
+- React (version 17.0.1)
+- React Google Maps (version 9.4.5)
 - Local Storage as Repository
 
 ## Available Scripts
