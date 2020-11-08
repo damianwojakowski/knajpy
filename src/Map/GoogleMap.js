@@ -3,6 +3,18 @@ import mapStyles from '../Config/mapStyles.js';
 import React from 'react';
 import uuid from 'react-uuid';
 
+function getIcon(marker) {
+    const red = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    const blue = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+    let time = new Date();
+
+    if (true) {
+       return  { url: red };
+    } else {
+       return { url: red };
+    }
+}
+
 export default function GoogleMapWrapper() {
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
@@ -71,6 +83,7 @@ export default function GoogleMapWrapper() {
                         onClick={() => {
                             setSelected(marker);
                         }}
+                        icon={getIcon(marker)}
                     />))}
 
                 {selected ? (<InfoWindow
