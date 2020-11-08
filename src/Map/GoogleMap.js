@@ -1,5 +1,7 @@
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api';
 import mapStyles from '../Config/mapStyles.js';
+import React from 'react';
+import uuid from 'react-uuid';
 
 export default function GoogleMapWrapper() {
     const {isLoaded, loadError} = useLoadScript({
@@ -22,6 +24,17 @@ export default function GoogleMapWrapper() {
         zoomControl: true
     };
 
+    const [markers, setMarkers] = React.useState([]);
+
+    const onMapClick = React.useCallback((event) => {
+        setMarkers((current) => [...current, {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            id: uuid()
+        }
+        ]);
+    }, []);
+
     if (loadError) {
         return "Error loading maps";
     }
@@ -37,7 +50,15 @@ export default function GoogleMapWrapper() {
                 zoom={15}
                 center={center}
                 options={options}
-            />
+                onClick={onMapClick}
+            >
+                {markers.map(marker => (
+                    <Marker
+                        key={marker.id}
+                        position={{lat: marker.lat, lng: marker.lng}}
+                    />))}
+
+            </GoogleMap>
         </div>
     );
 }
