@@ -1,11 +1,12 @@
-import './App.css';
+import {Component} from 'react';
+import Map from './Map/Map.js';
 
-function App() {
-    return (
-        <div className="App">
+export default class App extends Component {
 
-        </div>
-    );
+    render() {
+        return (
+            <Map />
+        );
+    }
+
 }
-
-export default App;
