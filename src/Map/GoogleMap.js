@@ -13,11 +13,6 @@ export default function GoogleMapWrapper() {
         height: '100vh'
     };
 
-    const center = {
-        lat: 51.107883,
-        lng: 17.038538
-    };
-
     const options = {
         styles: mapStyles,
         disableDefaultUI: true,
@@ -26,6 +21,10 @@ export default function GoogleMapWrapper() {
 
     const [selected, setSelected] = React.useState(null);
     const [markers, setMarkers] = React.useState([]);
+    const [center, setCenter] = React.useState({
+        lat: 51.107883,
+        lng: 17.038538
+    });
 
     const onMapClick = React.useCallback((event) => {
         setMarkers((current) => [...current, {
@@ -48,7 +47,7 @@ export default function GoogleMapWrapper() {
         <div>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                zoom={15}
+                zoom={12}
                 center={center}
                 options={options}
                 onClick={onMapClick}
@@ -57,8 +56,8 @@ export default function GoogleMapWrapper() {
                     <Marker
                         key={marker.id}
                         position={{lat: marker.lat, lng: marker.lng}}
-                        onClick={()  => {
-                            setSelected(marker)
+                        onClick={() => {
+                            setSelected(marker);
                         }}
                     />))}
 
