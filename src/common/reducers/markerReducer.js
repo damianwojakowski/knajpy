@@ -18,6 +18,7 @@ function markerReducer(state = initialState, action) {
         });
     } else if (action.type === UNSELECT_MARKER) {
         return Object.assign({}, state, {
+            selectedMarker: {},
             isSelected: false
         });
     }
