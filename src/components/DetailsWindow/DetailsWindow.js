@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import {Component} from 'react';
 import './styles.css';
 
-export default class DetailWindow extends Component{
+export default class DetailWindow extends Component {
 
     render() {
         return <div className="details-window">

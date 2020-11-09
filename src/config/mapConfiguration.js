@@ -15,6 +15,5 @@ export default {
         lng: 17.038538
     },
     ZOOM: 12
-
 }
 
