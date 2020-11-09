@@ -1,11 +1,11 @@
-import { ADD_MARKER, SELECT_MARKER } from "../constants/action.js";
+import {ADD_MARKER, SELECT_MARKER} from "../constants/action.js";
 
 const initialState = {
     markers: [],
     selected: {}
 };
 
-function addMarkerReducer(state = initialState, action) {
+function markerReducer(state = initialState, action) {
     if (action.type === ADD_MARKER) {
         return Object.assign({}, state, {
             markers: state.markers.concat(action.payload)
@@ -18,4 +18,4 @@ function addMarkerReducer(state = initialState, action) {
     return state;
 }
 
-export default addMarkerReducer;
+export default markerReducer;

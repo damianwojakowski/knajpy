@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {selectMarker} from '../../common/actions/markerActions.js';
 
 class Markers extends Component {
-
     constructor(props) {
         super(props);
         this.onMarkerClick = this.onMarkerClick.bind(this);
@@ -27,13 +26,13 @@ class Markers extends Component {
                     icon={MarkerIconPicker.getIcon(marker)}
                 />
             ))
-         }
+            }
         </div>
     }
 }
 
 const mapStateToProps = state => {
-    return { markers: state.markers.markers };
+    return {markers: state.markers.markers};
 };
 
 const mapDispatchToProps = dispatch => {
