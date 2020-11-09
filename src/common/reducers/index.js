@@ -1,16 +1,8 @@
-import { ADD_MARKER } from "../constants/action.js";
+import { combineReducers } from 'redux';
+import markerReducer from './markerReducer.js';
 
-const initialState = {
-    markers: []
-};
-
-function rootReducer(state = initialState, action) {
-    if (action.type === ADD_MARKER) {
-        return Object.assign({}, state, {
-            markers: state.markers.concat(action.payload)
-        });
-    }
-    return state;
-}
+const rootReducer = combineReducers({
+    markers: markerReducer
+});
 
 export default rootReducer;

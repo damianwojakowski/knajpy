@@ -1,12 +1,11 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {GoogleMap, LoadScript} from '@react-google-maps/api';
-import React from 'react';
 import uuid from 'react-uuid';
 import Markers from '../Markers/Markers.js';
 import DetailsWindow from '../DetailsWindow/DetailsWindow.js';
 import MapConfiguration from '../../config/mapConfiguration.js';
 import {connect} from 'react-redux';
-import {addMarker} from '../../common/actions/index.js';
+import {addMarker} from '../../common/actions/markerActions.js';
 
 class MapWrapper extends Component {
     constructor(props) {
@@ -42,11 +41,11 @@ class MapWrapper extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
     return {
         addMarker: marker => dispatch(addMarker(marker))
     };
-}
+};
 
 const GoogleMapWrapper = connect(
     null,
