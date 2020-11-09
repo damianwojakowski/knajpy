@@ -1,5 +1,5 @@
 import {GoogleMap, useLoadScript} from '@react-google-maps/api';
-import mapStyles from '../../Config/mapStyles.js';
+import mapStyles from '../../config/mapStyles.js';
 import React from 'react';
 import uuid from 'react-uuid';
 import Markers from '../Markers/Markers.js';

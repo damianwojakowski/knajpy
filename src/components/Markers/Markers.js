@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {Marker} from '@react-google-maps/api';
-import MarkerIconPicker from '../../Utilities/MarkerIconPicker.js';
+import MarkerIconPicker from '../../services/MarkerIconPicker.js';
 
 export default class Markers extends Component {
 
