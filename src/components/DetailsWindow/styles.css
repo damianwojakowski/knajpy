@@ -1,4 +1,4 @@
-.details-window {
+.menu {
     position: absolute;
     top: 0;
     right: 0;
@@ -7,4 +7,26 @@
     z-index: 10;
     background-color: white;
     text-align: center;
+}
+
+.menu-primary-enter {
+    position: absolute;
+    transform: translateX(110%);
+}
+
+.menu-primary-enter-active {
+    transform: translateX(0%);
+    transition-duration: 1s;
+    transition-timing-function: ease;
+}
+
+.menu-primary-exit {
+    position: absolute;
+    transform: translateX(0%);
+}
+
+.menu-primary-exit-active {
+    transform: translateX(110%);
+    transition-duration: 1s;
+    transition-timing-function: ease;
 }

@@ -1,8 +1,9 @@
-import {ADD_MARKER, SELECT_MARKER} from "../constants/action.js";
+import {ADD_MARKER, SELECT_MARKER, UNSELECT_MARKER} from "../constants/action.js";
 
 const initialState = {
     markers: [],
-    selected: {}
+    selectedMarker: {},
+    isSelected: false
 };
 
 function markerReducer(state = initialState, action) {
@@ -12,7 +13,12 @@ function markerReducer(state = initialState, action) {
         });
     } else if (action.type === SELECT_MARKER) {
         return Object.assign({}, state, {
-            selected: action.payload
+            selectedMarker: action.payload,
+            isSelected: true
+        });
+    } else if (action.type === UNSELECT_MARKER) {
+        return Object.assign({}, state, {
+            isSelected: false
         });
     }
     return state;
