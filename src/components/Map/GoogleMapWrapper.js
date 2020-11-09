@@ -5,8 +5,10 @@ import uuid from 'react-uuid';
 import Markers from '../Markers/Markers.js';
 import DetailsWindow from '../DetailsWindow/DetailsWindow.js';
 import MapConfiguration from '../../config/mapConfiguration.js';
+import {connect} from 'react-redux';
+import {addMarker} from '../../common/actions/index.js';
 
-export default class GoogleMapWrapper extends Component {
+class MapWrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,14 +19,10 @@ export default class GoogleMapWrapper extends Component {
     }
 
     onMapClick(event) {
-        this.setState((state, props) => {
-            return {
-                markers: [...state.markers, {
-                    lng: event.latLng.lng(),
-                    lat: event.latLng.lat(),
-                    id: uuid()
-                }]
-            }
+        this.props.addMarker({
+            lng: event.latLng.lng(),
+            lat: event.latLng.lat(),
+            id: uuid()
         });
     }
 
@@ -38,9 +36,8 @@ export default class GoogleMapWrapper extends Component {
                         center={MapConfiguration.CENTER}
                         options={MapConfiguration.OPTIONS}
                         onClick={this.onMapClick}
-                        // onLoad={this.onMapLoad}
                     >
-                        <Markers markers={this.state.markers}/>
+                        <Markers />
                         <DetailsWindow />
                     </GoogleMap>
                 </LoadScript>
@@ -48,3 +45,16 @@ export default class GoogleMapWrapper extends Component {
         )
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addMarker: marker => dispatch(addMarker(marker))
+    };
+}
+
+const GoogleMapWrapper = connect(
+    null,
+    mapDispatchToProps
+)(MapWrapper);
+
+export default GoogleMapWrapper

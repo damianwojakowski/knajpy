@@ -1,8 +1,9 @@
 import {Component} from 'react';
 import {Marker} from '@react-google-maps/api';
 import MarkerIconPicker from '../../services/MarkerIconPicker.js';
+import {connect} from 'react-redux';
 
-export default class Markers extends Component {
+class Markers extends Component {
 
     constructor(props) {
         super(props);
@@ -24,3 +25,9 @@ export default class Markers extends Component {
         </div>
     }
 }
+
+const mapStateToProps = state => {
+    return { markers: state.markers };
+};
+
+export default connect(mapStateToProps)(Markers);
