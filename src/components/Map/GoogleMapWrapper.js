@@ -1,10 +1,10 @@
 import {Component} from 'react';
-import {GoogleMap, useLoadScript, LoadScript} from '@react-google-maps/api';
-import mapStyles from '../../config/mapStyles.js';
+import {GoogleMap, LoadScript} from '@react-google-maps/api';
 import React from 'react';
 import uuid from 'react-uuid';
 import Markers from '../Markers/Markers.js';
 import DetailsWindow from '../DetailsWindow/DetailsWindow.js';
+import MapConfiguration from '../../config/mapConfiguration.js';
 
 export default class GoogleMapWrapper extends Component{
 
@@ -27,22 +27,6 @@ export default class GoogleMapWrapper extends Component{
         //     this.mapRef.current.panTo({lat, lng});
         // }, []);
 
-        this.mapContainerStyle = {
-            with: '100vw',
-            height: '100vh'
-        };
-
-        this.options = {
-            styles: mapStyles,
-            disableDefaultUI: true,
-            zoomControl: true
-        };
-
-        this.center = {
-            lat: 51.107883,
-            lng: 17.038538
-        };
-
         this.state = {
             markers: []
         };
@@ -50,7 +34,7 @@ export default class GoogleMapWrapper extends Component{
         //
         // const [selected, setSelected] = React.useState(null);
         // const [markers, setMarkers] = React.useState([]);
-        // const [center, setCenter] = React.useState({
+        // const [CENTER, setCenter] = React.useState({
         //     lat: 51.107883,
         //     lng: 17.038538
         // });
@@ -85,10 +69,10 @@ export default class GoogleMapWrapper extends Component{
             <div>
                 <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
                     <GoogleMap
-                        mapContainerStyle={this.mapContainerStyle}
-                        zoom={12}
-                        center={this.center}
-                        options={this.options}
+                        mapContainerStyle={MapConfiguration.CONTAINER_STYLE}
+                        zoom={MapConfiguration.ZOOM}
+                        center={MapConfiguration.CENTER}
+                        options={MapConfiguration.OPTIONS}
                         onClick={this.onMapClick}
                         // onLoad={this.onMapLoad}
                     >
