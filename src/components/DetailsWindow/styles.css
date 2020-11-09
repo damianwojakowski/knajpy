@@ -1,0 +1,10 @@
+.details-window {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 25%;
+    height: 100%;
+    z-index: 10;
+    background-color: white;
+    text-align: center;
+}

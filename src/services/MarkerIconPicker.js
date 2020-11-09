@@ -1,4 +1,4 @@
-export default class IconPicker {
+export default class MarkerIconPicker {
 
     static getIcon(marker) {
         const red = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
