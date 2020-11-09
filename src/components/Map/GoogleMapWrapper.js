@@ -7,8 +7,6 @@ import DetailsWindow from '../DetailsWindow/DetailsWindow.js';
 import MapConfiguration from '../../config/mapConfiguration.js';
 
 export default class GoogleMapWrapper extends Component{
-
-
     constructor(props) {
         super(props);
         this.state = {
