@@ -11,10 +11,6 @@ import {addMarker} from '../../common/actions/index.js';
 class MapWrapper extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            markers: []
-        };
-
         this.onMapClick = this.onMapClick.bind(this);
     }
 
