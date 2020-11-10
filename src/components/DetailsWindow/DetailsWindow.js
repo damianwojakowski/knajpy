@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './styles.css';
 import {CSSTransition} from 'react-transition-group';
 import {connect} from 'react-redux';
-import {unselectMarker} from '../../common/actions/markerActions.js';
+import {unselectMarker, addMarker} from '../../common/actions/markerActions.js';
 import TimePicker from 'react-time-picker';
 
 class DetailWindow extends Component {
@@ -15,7 +15,7 @@ class DetailWindow extends Component {
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
 
-        this.state = {
+        this.initialState = {
             name: "",
             description: "",
             openFrom: "",
@@ -24,6 +24,8 @@ class DetailWindow extends Component {
             lng: "",
             id: ""
         };
+
+        this.state = this.initialState;
     }
 
     close() {
@@ -63,6 +65,17 @@ class DetailWindow extends Component {
             lng: this.props.selectedMarker.lng,
             id: this.props.selectedMarker.id
         });
+
+        let newMarker = Object.assign({}, this.setState, {
+            lat: this.props.selectedMarker.lat,
+            lng: this.props.selectedMarker.lng,
+            id: this.props.selectedMarker.id
+        });
+
+        this.props.addMarker(newMarker);
+        this.props.unselectMarker();
+
+        this.setState(this.initialState);
     }
 
     render() {
@@ -99,10 +112,6 @@ class DetailWindow extends Component {
                         <br />
                         <input type="submit" value="Add Marker" />
                     </form>
-
-                    <div>id: {this.props.selectedMarker.id}</div>
-                    <div>lat: {this.props.selectedMarker.id}</div>
-                    <div>lng: {this.props.selectedMarker.id}</div>
                 </div>
             </CSSTransition>
         )
@@ -118,7 +127,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        unselectMarker: () => dispatch(unselectMarker())
+        unselectMarker: () => dispatch(unselectMarker()),
+        addMarker: marker => dispatch(addMarker(marker)),
     };
 };
 
