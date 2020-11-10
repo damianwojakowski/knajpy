@@ -4,6 +4,8 @@ import {CSSTransition} from 'react-transition-group';
 import {connect} from 'react-redux';
 import {unselectMarker, addMarker} from '../../common/actions/markerActions.js';
 import TimePicker from 'react-time-picker';
+import { Icon } from 'react-icons-kit'
+import {cross} from 'react-icons-kit/icomoon/cross'
 
 class DetailWindow extends Component {
     constructor(props) {
@@ -80,7 +82,8 @@ class DetailWindow extends Component {
                 classNames="menu-primary"
             >
                 <div className="menu">
-                    <h1 onClick={this.close}>Details Window</h1>
+                    <Icon style={{cursor: "pointer", float: "right"}} onClick={this.close} icon={cross}/>
+                    <h3>Details</h3>
 
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
