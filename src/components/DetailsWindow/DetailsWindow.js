@@ -17,6 +17,7 @@ class DetailWindow extends Component {
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
 
+        // TODO: Create a model for Markers
         this.initialState = {
             name: "",
             description: "",
