@@ -58,13 +58,6 @@ class DetailWindow extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
-
-        this.setState({
-            lat: this.props.selectedMarker.lat,
-            lng: this.props.selectedMarker.lng,
-            id: this.props.selectedMarker.id
-        });
 
         let newMarker = Object.assign({}, this.setState, {
             lat: this.props.selectedMarker.lat,
@@ -90,27 +83,35 @@ class DetailWindow extends Component {
                     <h1 onClick={this.close}>Details Window</h1>
 
                     <form onSubmit={this.handleSubmit}>
-                        <p>Open from:</p>
-                        <TimePicker
-                            onChange={this.onChangeOpenFrom}
-                            value={this.state.openFrom}
-                            required
-                        />
-                        <br />
-                        <p>Open to:</p>
-                        <TimePicker
-                            onChange={this.onChangeOpenTo}
-                            value={this.state.openTo}
-                            required
-                        />
-                        <br />
-                        <p>Bar Name:</p>
-                        <input type="text" value={this.state.name} onChange={this.onChangeName} required />
-                        <br />
-                        <p>Bar Description:</p>
-                        <textarea value={this.state.description} onChange={this.onChangeDescription} required />
-                        <br />
-                        <input type="submit" value="Add Marker" />
+                        <div className="form-group">
+                            <label>Open From:</label><br />
+                            <TimePicker
+                                onChange={this.onChangeOpenFrom}
+                                value={this.state.openFrom}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label for="open_to">Open To:</label><br />
+                            <TimePicker
+                                onChange={this.onChangeOpenTo}
+                                value={this.state.openTo}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label for="name_input">Name</label>
+                            <input id="name_input" className="form-control" type="text" value={this.state.name} onChange={this.onChangeName} required />
+                        </div>
+
+                        <div className="form-group">
+                            <label for="description">Description</label>
+                            <textarea className="form-control" id="description" value={this.state.description} onChange={this.onChangeDescription} required />
+                        </div>
+
+                        <input className="btn btn-primary" type="submit" value="Add Marker" />
                     </form>
                 </div>
             </CSSTransition>
