@@ -59,7 +59,7 @@ class DetailWindow extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let newMarker = Object.assign({}, this.setState, {
+        let newMarker = Object.assign({}, this.state, {
             lat: this.props.selectedMarker.lat,
             lng: this.props.selectedMarker.lng,
             id: this.props.selectedMarker.id
@@ -93,7 +93,7 @@ class DetailWindow extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label for="open_to">Open To:</label><br />
+                            <label htmlFor="open_to">Open To:</label><br />
                             <TimePicker
                                 onChange={this.onChangeOpenTo}
                                 value={this.state.openTo}
@@ -102,12 +102,12 @@ class DetailWindow extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label for="name_input">Name</label>
+                            <label htmlFor="name_input">Name</label>
                             <input id="name_input" className="form-control" type="text" value={this.state.name} onChange={this.onChangeName} required />
                         </div>
 
                         <div className="form-group">
-                            <label for="description">Description</label>
+                            <label htmlFor="description">Description</label>
                             <textarea className="form-control" id="description" value={this.state.description} onChange={this.onChangeDescription} required />
                         </div>
 
