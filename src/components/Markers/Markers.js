@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Marker} from '@react-google-maps/api';
 import MarkerIconPicker from '../../services/MarkerIconPicker.js';
 import {connect} from 'react-redux';
-import {selectMarker} from '../../common/actions/markerActions.js';
+import {previewExistingMarker} from '../../common/actions/markerActions.js';
 
 class Markers extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Markers extends Component {
     }
 
     onMarkerClick(marker) {
-        this.props.selectMarker(marker);
+        this.props.previewExistingMarker(marker);
     }
 
     render() {
@@ -27,9 +27,9 @@ class Markers extends Component {
                 />
             ))
             }
-            {this.props.isSelected && <Marker
-                key={this.props.selectedMarker.id}
-                position={{lat: this.props.selectedMarker.lat, lng: this.props.selectedMarker.lng}}
+            {this.props.isBeingPrepared && <Marker
+                key={this.props.newMarkerPosition.id}
+                position={{lat: this.props.newMarkerPosition.lat, lng: this.props.newMarkerPosition.lng}}
                 icon={MarkerIconPicker.getNewMarkerIcon()}
             />}
         </div>
@@ -39,14 +39,14 @@ class Markers extends Component {
 const mapStateToProps = state => {
     return {
         markers: state.markers.markers,
-        isSelected: state.markers.isSelected,
-        selectedMarker: state.markers.selectedMarker
+        isBeingPrepared: state.markers.isBeingPrepared,
+        newMarkerPosition: state.markers.newMarkerPosition
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        selectMarker: marker => dispatch(selectMarker(marker))
+        previewExistingMarker: marker => dispatch(previewExistingMarker(marker))
     };
 };
 

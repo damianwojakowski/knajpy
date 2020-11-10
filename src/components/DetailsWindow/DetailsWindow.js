@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import './styles.css';
 import {CSSTransition} from 'react-transition-group';
 import {connect} from 'react-redux';
-import {unselectMarker, addMarker} from '../../common/actions/markerActions.js';
+import {unselectNewMarker, saveMarker, exitPreview} from '../../common/actions/markerActions.js';
 import TimePicker from 'react-time-picker';
-import { Icon } from 'react-icons-kit'
+import {Icon} from 'react-icons-kit'
 import {cross} from 'react-icons-kit/icomoon/cross'
 
 class DetailWindow extends Component {
@@ -31,7 +31,11 @@ class DetailWindow extends Component {
     }
 
     close() {
-        this.props.unselectMarker();
+        if (this.props.isBeingPrepared) {
+            this.props.unselectNewMarker();
+        } else {
+            this.props.exitPreview();
+        }
     }
 
     onChangeOpenFrom(openFrom) {
@@ -62,13 +66,14 @@ class DetailWindow extends Component {
         event.preventDefault();
 
         let newMarker = Object.assign({}, this.state, {
-            lat: this.props.selectedMarker.lat,
-            lng: this.props.selectedMarker.lng,
-            id: this.props.selectedMarker.id
+            lat: this.props.newMarkerPosition.lat,
+            lng: this.props.newMarkerPosition.lng,
+            id: this.props.newMarkerPosition.id,
+            draft: false
         });
 
-        this.props.addMarker(newMarker);
-        this.props.unselectMarker();
+        this.props.saveMarker(newMarker);
+        this.props.unselectNewMarker();
 
         this.setState(this.initialState);
     }
@@ -76,7 +81,7 @@ class DetailWindow extends Component {
     render() {
         return (
             <CSSTransition
-                in={this.props.isSelected}
+                in={(this.props.isBeingPrepared || this.props.isViewed)}
                 unmountOnExit
                 timeout={1000}
                 classNames="menu-primary"
@@ -85,7 +90,7 @@ class DetailWindow extends Component {
                     <Icon style={{cursor: "pointer", float: "right"}} onClick={this.close} icon={cross}/>
                     <h3>Details</h3>
 
-                    <form onSubmit={this.handleSubmit}>
+                    {this.props.isBeingPrepared === true && <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label>Open From:</label><br />
                             <TimePicker
@@ -106,16 +111,26 @@ class DetailWindow extends Component {
 
                         <div className="form-group">
                             <label htmlFor="name_input">Name</label>
-                            <input id="name_input" className="form-control" type="text" value={this.state.name} onChange={this.onChangeName} required />
+                            <input id="name_input" className="form-control" type="text" value={this.state.name}
+                                   onChange={this.onChangeName} required/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
-                            <textarea className="form-control" id="description" value={this.state.description} onChange={this.onChangeDescription} required />
+                            <textarea className="form-control" id="description" value={this.state.description}
+                                      onChange={this.onChangeDescription} required/>
                         </div>
 
-                        <input className="btn btn-primary" type="submit" value="Add Marker" />
+                        <input className="btn btn-primary" type="submit" value="Add Marker"/>
                     </form>
+                    }
+
+                    {this.props.isViewed === true && <div>
+                        <div>Open From: {this.props.previewMarker.openFrom}</div>
+                        <div>Open To: {this.props.previewMarker.openTo}</div>
+                        <div>Name: {this.props.previewMarker.name}</div>
+                        <div>Description: {this.props.previewMarker.description}</div>
+                    </div>}
                 </div>
             </CSSTransition>
         )
@@ -124,15 +139,18 @@ class DetailWindow extends Component {
 
 const mapStateToProps = state => {
     return {
-        isSelected: state.markers.isSelected,
-        selectedMarker: state.markers.selectedMarker
+        isBeingPrepared: state.markers.isBeingPrepared,
+        newMarkerPosition: state.markers.newMarkerPosition,
+        isViewed: state.isViewed,
+        previewMarker: state.previewMarker
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        unselectMarker: () => dispatch(unselectMarker()),
-        addMarker: marker => dispatch(addMarker(marker)),
+        unselectNewMarker: () => dispatch(unselectNewMarker()),
+        saveMarker: marker => dispatch(saveMarker(marker)),
+        exitPreview: () => dispatch(exitPreview()),
     };
 };
 

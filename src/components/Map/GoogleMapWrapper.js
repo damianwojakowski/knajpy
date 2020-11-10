@@ -5,7 +5,7 @@ import Markers from '../Markers/Markers.js';
 import DetailsWindow from '../DetailsWindow/DetailsWindow.js';
 import MapConfiguration from '../../config/mapConfiguration.js';
 import {connect} from 'react-redux';
-import {addMarker, selectMarker} from '../../common/actions/markerActions.js';
+import {saveMarker, prepareNewMarker} from '../../common/actions/markerActions.js';
 
 class MapWrapper extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class MapWrapper extends Component {
     }
 
     onMapClick(event) {
-        this.props.selectMarker({
+        this.props.prepareNewMarker({
             lng: event.latLng.lng(),
             lat: event.latLng.lat(),
             id: uuid()
@@ -43,8 +43,7 @@ class MapWrapper extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addMarker: marker => dispatch(addMarker(marker)),
-        selectMarker: marker => dispatch(selectMarker(marker))
+        prepareNewMarker: marker => dispatch(prepareNewMarker(marker))
     };
 };
 

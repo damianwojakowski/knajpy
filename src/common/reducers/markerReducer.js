@@ -1,25 +1,49 @@
-import {ADD_MARKER, SELECT_MARKER, UNSELECT_MARKER} from "../constants/action.js";
+import {
+    SAVE_MARKER,
+    PREPARE_NEW_MARKER,
+    UNSELECT_NEW_MARKER,
+    PREVIEW_EXISTING_MARKER,
+    EXIT_PREVIEW
+} from "../constants/action.js";
+import LocalStorageRepository from '../../services/LocalStorageRepository.js';
 
 const initialState = {
-    markers: [],
+    markers: LocalStorageRepository.loadMarkers(),
     selectedMarker: {},
-    isSelected: false
+    isSelected: false,
+    previewMarker: {},
+    isViewed: false,
 };
 
 function markerReducer(state = initialState, action) {
-    if (action.type === ADD_MARKER) {
-        return Object.assign({}, state, {
+    if (action.type === SAVE_MARKER) {
+        let newState = Object.assign({}, state, {
             markers: state.markers.concat(action.payload)
         });
-    } else if (action.type === SELECT_MARKER) {
+        LocalStorageRepository.overwriteMarkers(newState.markers);
+        return newState;
+    } else if (action.type === PREPARE_NEW_MARKER) {
         return Object.assign({}, state, {
-            selectedMarker: action.payload,
-            isSelected: true
+            newMarkerPosition: action.payload,
+            isBeingPrepared: true
         });
-    } else if (action.type === UNSELECT_MARKER) {
+    } else if (action.type === UNSELECT_NEW_MARKER) {
         return Object.assign({}, state, {
-            selectedMarker: {},
-            isSelected: false
+            newMarkerPosition: {},
+            isBeingPrepared: false
+        });
+    } else if (action.type === PREVIEW_EXISTING_MARKER) {
+        console.log(action);
+        return Object.assign({}, state, {
+            previewMarker: action.payload,
+            isViewed: true,
+            newMarkerPosition: {},
+            isBeingPrepared: false
+        });
+    } else if (action.type === EXIT_PREVIEW) {
+        return Object.assign({}, state, {
+            previewMarker: {},
+            isViewed: false,
         });
     }
     return state;

@@ -1,13 +1,27 @@
-import {ADD_MARKER, SELECT_MARKER, UNSELECT_MARKER} from "../constants/action.js";
+import {
+    SAVE_MARKER,
+    PREPARE_NEW_MARKER,
+    UNSELECT_NEW_MARKER,
+    PREVIEW_EXISTING_MARKER,
+    EXIT_PREVIEW
+} from "../constants/action.js";
 
-export function addMarker(payload) {
-    return {type: ADD_MARKER, payload};
+export function saveMarker(payload) {
+    return {type: SAVE_MARKER, payload};
 }
 
-export function selectMarker(payload) {
-    return {type: SELECT_MARKER, payload};
+export function prepareNewMarker(payload) {
+    return {type: PREPARE_NEW_MARKER, payload};
 }
 
-export function unselectMarker() {
-    return {type: UNSELECT_MARKER};
+export function unselectNewMarker() {
+    return {type: UNSELECT_NEW_MARKER};
+}
+
+export function previewExistingMarker(payload) {
+    return {type: PREVIEW_EXISTING_MARKER, payload};
+}
+
+export function exitPreview() {
+    return {type: EXIT_PREVIEW};
 }
