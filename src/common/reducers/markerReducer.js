@@ -25,7 +25,9 @@ function markerReducer(state = initialState, action) {
     } else if (action.type === PREPARE_NEW_MARKER) {
         return Object.assign({}, state, {
             newMarkerPosition: action.payload,
-            isBeingPrepared: true
+            isBeingPrepared: true,
+            previewMarker: {},
+            isViewed: false,
         });
     } else if (action.type === UNSELECT_NEW_MARKER) {
         return Object.assign({}, state, {
@@ -33,7 +35,6 @@ function markerReducer(state = initialState, action) {
             isBeingPrepared: false
         });
     } else if (action.type === PREVIEW_EXISTING_MARKER) {
-        console.log(action);
         return Object.assign({}, state, {
             previewMarker: action.payload,
             isViewed: true,

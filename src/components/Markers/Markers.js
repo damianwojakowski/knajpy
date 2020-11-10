@@ -7,7 +7,6 @@ import {previewExistingMarker} from '../../common/actions/markerActions.js';
 class Markers extends Component {
     constructor(props) {
         super(props);
-        this.onMarkerClick = this.onMarkerClick.bind(this);
     }
 
     onMarkerClick(marker) {

@@ -126,11 +126,16 @@ class DetailWindow extends Component {
                     }
 
                     {this.props.isViewed === true && <div>
-                        <div>Open From: {this.props.previewMarker.openFrom}</div>
-                        <div>Open To: {this.props.previewMarker.openTo}</div>
-                        <div>Name: {this.props.previewMarker.name}</div>
-                        <div>Description: {this.props.previewMarker.description}</div>
-                    </div>}
+                        <div className="card text-center">
+                            <div className="card-body">
+                                <h5 className="card-title">{this.props.previewMarker.name}</h5>
+                                <p className="card-text">{this.props.previewMarker.description}</p>
+                                <p>Open From: {this.props.previewMarker.openFrom}</p>
+                                <p>Open To: {this.props.previewMarker.openTo}</p>
+                            </div>
+                        </div>
+                    </div>
+                    }
                 </div>
             </CSSTransition>
         )
@@ -141,8 +146,8 @@ const mapStateToProps = state => {
     return {
         isBeingPrepared: state.markers.isBeingPrepared,
         newMarkerPosition: state.markers.newMarkerPosition,
-        isViewed: state.isViewed,
-        previewMarker: state.previewMarker
+        isViewed: state.markers.isViewed,
+        previewMarker: state.markers.previewMarker
     };
 };
 
