@@ -27,12 +27,21 @@ class Markers extends Component {
                 />
             ))
             }
+            {this.props.isSelected && <Marker
+                key={this.props.selectedMarker.id}
+                position={{lat: this.props.selectedMarker.lat, lng: this.props.selectedMarker.lng}}
+                icon={MarkerIconPicker.getNewMarkerIcon()}
+            />}
         </div>
     }
 }
 
 const mapStateToProps = state => {
-    return {markers: state.markers.markers};
+    return {
+        markers: state.markers.markers,
+        isSelected: state.markers.isSelected,
+        selectedMarker: state.markers.selectedMarker
+    };
 };
 
 const mapDispatchToProps = dispatch => {
